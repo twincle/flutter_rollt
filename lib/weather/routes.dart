@@ -5,7 +5,21 @@ List<GetPage<dynamic>> getPages = [
     bindings: [
       WeatherControllerBinding(),
     ],
-    name: '/weather',
+    name: '/weather/search',
+    page: () => const SearchPage(),
+  ),
+  GetPage(
+    bindings: [
+      WeatherControllerBinding(),
+    ],
+    name: '/weather/weather',
     page: () => const WeatherPage(),
+  ),
+  GetPage(
+    bindings: [
+      WeatherControllerBinding(),
+    ],
+    name: '/weather/weathers',
+    page: () => const WeathersPage(),
   ),
 ];

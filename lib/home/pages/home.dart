@@ -13,7 +13,7 @@ class HomePage extends GetView<HomePageController> {
             child: Column(
               children: [
                 ElevatedButton(
-                  onPressed: () => Get.toNamed('/weather'),
+                  onPressed: () => Get.toNamed('/weather/weather'),
                   child: const Text('天气'),
                 )
               ],

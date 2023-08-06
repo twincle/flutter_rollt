@@ -9,7 +9,9 @@ import 'package:get/get.dart';
 
 import '../base/index.dart';
 
+part 'pages/search.dart';
 part 'pages/weather.dart';
+part 'pages/weathers.dart';
 
 part 'binding.dart';
 part 'routes.dart';
