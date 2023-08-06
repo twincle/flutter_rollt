@@ -1,6 +1,6 @@
 part of inquiry;
 
-class UserControllerBinding implements Bindings {
+class InquiryControllerBinding implements Bindings {
   @override
   void dependencies() {}
 }

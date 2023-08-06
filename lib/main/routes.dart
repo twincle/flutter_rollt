@@ -2,7 +2,9 @@ part of main;
 
 List<GetPage<dynamic>> getPages = [
   GetPage(
-    binding: MainControllerBinding(),
+    bindings: [
+      MainControllerBinding(),
+    ],
     name: '/',
     page: () => const MainPage(),
   ),
