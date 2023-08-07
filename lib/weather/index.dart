@@ -13,6 +13,10 @@ part 'pages/search.dart';
 part 'pages/weather.dart';
 part 'pages/weathers.dart';
 
+part 'widgets/feel.dart';
+part 'widgets/life.dart';
+part 'widgets/weather_bg.dart';
+
 part 'binding.dart';
 part 'routes.dart';
 part 'services.dart';

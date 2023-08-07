@@ -20,198 +20,131 @@ class WeatherPage extends GetView<WeatherPageController> {
                 ),
               );
             } else {
-              return Container(
-                decoration: const BoxDecoration(
-                  color: weatherBackgroundColor,
-                ),
-                child: Container(
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      /** 
-                       * https://assets.msn.cn/weathermapdata/1/static/background/mobile/Cloudy%20Night1.png
-                       */
-                      image: NetworkImage(
-                        'https://assets.msn.cn/weathermapdata/1/static/background/mobile/mostcloudy_sunset1.png',
-                      ),
-                      fit: BoxFit.cover,
+              return Stack(
+                children: [
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    top: 0,
+                    child: WeatherBgWidget(
+                      almanac: controller.weather['almanac'],
+                      weather: controller.weather['cap'],
                     ),
                   ),
-                  padding: const EdgeInsets.all(15),
-                  child: ListView(
-                    children: [
-                      () {
-                        if (controller.locations.isEmpty) {
-                          return Row(
-                            children: [
-                              Text(
-                                '${controller.location['state']} ${controller.location['city']}  ',
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
+                  Container(
+                    padding: const EdgeInsets.all(15),
+                    child: ListView(
+                      children: [
+                        () {
+                          if (controller.locations.isEmpty) {
+                            return Row(
+                              children: [
+                                Text(
+                                  '${controller.location['state']} ${controller.location['city']}  ',
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                  ),
                                 ),
-                              ),
-                              Container(
-                                child: controller.locations.isEmpty
-                                    ? InkWell(
-                                        onTap: () =>
-                                            Get.toNamed('/weather/search'),
-                                        child: const Text(
-                                          '更多天气信息请点这',
-                                          style: TextStyle(
+                                Container(
+                                  child: controller.locations.isEmpty
+                                      ? InkWell(
+                                          onTap: () =>
+                                              Get.toNamed('/weather/search'),
+                                          child: const Text(
+                                            '更多天气信息请点这',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 14,
+                                            ),
+                                          ),
+                                        )
+                                      : InkWell(
+                                          onTap: () =>
+                                              Get.toNamed('/weather/weathers'),
+                                          child: const Icon(
+                                            Icons
+                                                .arrow_drop_down_circle_outlined,
                                             color: Colors.white,
-                                            fontSize: 14,
+                                            size: 16,
                                           ),
                                         ),
-                                      )
-                                    : InkWell(
-                                        onTap: () =>
-                                            Get.toNamed('/weather/weathers'),
-                                        child: const Icon(
-                                          Icons.arrow_drop_down_circle_outlined,
-                                          color: Colors.white,
-                                          size: 16,
-                                        ),
-                                      ),
-                              ),
-                            ],
-                          );
-                        } else {
-                          return Container();
-                        }
-                      }(),
-                      Container(
-                        padding: const EdgeInsets.all(15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              '${(controller.weather['temp'] as double).floor()}',
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 80,
-                              ),
-                            ),
-                            const Text(
-                              '  ℃',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 30,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.only(
-                          bottom: 15,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              controller.weather['dayw'],
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                              ),
-                            ),
-                            Text(
-                              controller.weather['isDnSame']
-                                  ? ''
-                                  : '转${controller.weather['nightw']}',
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                              ),
-                            ),
-                            Text(
-                              '  ${(controller.weather['tempHi'] as double).floor()}℃ / ${(controller.weather['tempLo'] as double).floor()}℃',
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                                ),
+                              ],
+                            );
+                          } else {
+                            return Container();
+                          }
+                        }(),
+                        Container(
+                          padding: const EdgeInsets.all(15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Container(
-                                padding: const EdgeInsets.all(5),
-                                child: Text(
-                                  '湿度： ${(controller.weather['rh'] as double).floor()}%',
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                  ),
+                              Text(
+                                '${(controller.weather['temp'] as double).floor()}',
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 80,
                                 ),
                               ),
-                              Container(
-                                padding: const EdgeInsets.all(5),
-                                child: Text(
-                                  '体感： ${(controller.weather['feels'] as double).floor()}℃',
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                  ),
+                              const Text(
+                                '  ℃  ',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 30,
                                 ),
                               ),
-                              Container(
-                                padding: const EdgeInsets.all(5),
-                                child: Text(
-                                  '风速： ${controller.weather['pvdrWindDir']}${controller.weather['pvdrWindSpd']}',
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                  ),
+                              Text(
+                                controller.weather['cap'],
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 24,
                                 ),
                               ),
                             ],
                           ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                        ),
+                        Container(
+                          padding: const EdgeInsets.only(
+                            bottom: 30,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Container(
-                                padding: const EdgeInsets.all(5),
-                                child: Text(
-                                  '气压： ${(controller.weather['baro'] as double).floor()}帕',
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                  ),
+                              Text(
+                                controller.weather['dayw'],
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
                                 ),
                               ),
-                              Container(
-                                padding: const EdgeInsets.all(5),
-                                child: Text(
-                                  '能见度： ${controller.weather['vis']}公里',
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                  ),
+                              Text(
+                                controller.weather['isDnSame']
+                                    ? ''
+                                    : '转${controller.weather['nightw']}',
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
                                 ),
                               ),
-                              Container(
-                                padding: const EdgeInsets.all(5),
-                                child: Text(
-                                  '空气质量： ${(controller.weather['aqi'] as double).floor()}',
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                  ),
+                              Text(
+                                '    ${(controller.weather['tempHi'] as double).floor()}℃ / ${(controller.weather['tempLo'] as double).floor()}℃',
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
                                 ),
                               ),
                             ],
                           ),
-                        ],
-                      ),
-                    ],
+                        ),
+                        FeelWidget(weather: controller.weather),
+                        LifeWidget(life: controller.weather['life']),
+                      ],
+                    ),
                   ),
-                ),
+                ],
               );
             }
           }(),
@@ -288,7 +221,9 @@ class WeatherPageController extends GetxController {
 
   void onWeather() {
     weather = {
+      'almanac': _w['forecast']['days'][0]['almanac'],
       'temp': _w['current']['temp'],
+      'cap': _w['current']['cap'],
       'dayw': _w['forecast']['days'][0]['daily']['day']['cap'],
       'nightw': _w['forecast']['days'][0]['daily']['night']['cap'],
       'isDnSame': _w['forecast']['days'][0]['daily']['day']['cap'] ==
@@ -302,6 +237,7 @@ class WeatherPageController extends GetxController {
       'aqi': _w['current']['aqi'],
       'baro': _w['current']['baro'],
       'vis': _w['current']['vis'],
+      'life': _w['lifeDaily']['days'][0],
     };
   }
 }
