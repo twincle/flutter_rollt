@@ -77,68 +77,7 @@ class WeatherPage extends GetView<WeatherPageController> {
                             return Container();
                           }
                         }(),
-                        Container(
-                          padding: const EdgeInsets.all(15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                '${(controller.weather['temp'] as double).floor()}',
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 80,
-                                ),
-                              ),
-                              const Text(
-                                '  ℃  ',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 30,
-                                ),
-                              ),
-                              Text(
-                                controller.weather['cap'],
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 24,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.only(
-                            bottom: 30,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                controller.weather['dayw'],
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                ),
-                              ),
-                              Text(
-                                controller.weather['isDnSame']
-                                    ? ''
-                                    : '转${controller.weather['nightw']}',
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                ),
-                              ),
-                              Text(
-                                '    ${(controller.weather['tempHi'] as double).floor()}℃ / ${(controller.weather['tempLo'] as double).floor()}℃',
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                        TempWidget(temp: controller.weather),
                         FeelWidget(weather: controller.weather),
                         LifeWidget(life: controller.weather['life']),
                       ],
