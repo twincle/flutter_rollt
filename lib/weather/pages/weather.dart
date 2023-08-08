@@ -79,6 +79,7 @@ class WeatherPage extends GetView<WeatherPageController> {
                         }(),
                         TempWidget(temp: controller.weather),
                         FeelWidget(weather: controller.weather),
+                        ForeDaysWidget(weather: controller.weather['forecast']),
                         LifeWidget(life: controller.weather['life']),
                       ],
                     ),
@@ -163,6 +164,7 @@ class WeatherPageController extends GetxController {
       'almanac': _w['forecast']['days'][0]['almanac'],
       'temp': _w['current']['temp'],
       'cap': _w['current']['cap'],
+      'forecast': _w['forecast']['days'],
       'dayw': _w['forecast']['days'][0]['daily']['day']['cap'],
       'nightw': _w['forecast']['days'][0]['daily']['night']['cap'],
       'isDnSame': _w['forecast']['days'][0]['daily']['day']['cap'] ==

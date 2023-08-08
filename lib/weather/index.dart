@@ -15,6 +15,7 @@ part 'pages/weather.dart';
 part 'pages/weathers.dart';
 
 part 'widgets/feel.dart';
+part 'widgets/fore_days.dart';
 part 'widgets/hourly.dart';
 part 'widgets/life.dart';
 part 'widgets/temp.dart';

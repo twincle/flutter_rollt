@@ -42,7 +42,7 @@ class TempWidget extends StatelessWidget {
                     temp['cap'],
                     style: const TextStyle(
                       color: Colors.white,
-                      fontSize: 20,
+                      fontSize: 18,
                     ),
                   ),
                 ],
