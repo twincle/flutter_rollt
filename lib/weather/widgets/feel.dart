@@ -33,7 +33,7 @@ class FeelWidget extends StatelessWidget {
                   top: 5,
                 ),
                 child: Text(
-                  '湿度： ${(weather['rh'] as double).floor()}%',
+                  '湿度：${(weather['rh'] as double).floor()}%',
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 14,
@@ -46,7 +46,7 @@ class FeelWidget extends StatelessWidget {
                   top: 5,
                 ),
                 child: Text(
-                  '体感： ${(weather['feels'] as double).floor()}℃',
+                  '体感：${(weather['feels'] as double).floor()}℃',
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 14,
@@ -59,7 +59,7 @@ class FeelWidget extends StatelessWidget {
                   top: 5,
                 ),
                 child: Text(
-                  '风速： ${weather['pvdrWindDir']}${weather['pvdrWindSpd']}',
+                  '风速：${weather['pvdrWindDir']}${weather['pvdrWindSpd']}',
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 14,
@@ -77,7 +77,7 @@ class FeelWidget extends StatelessWidget {
                   top: 5,
                 ),
                 child: Text(
-                  '气压： ${(weather['baro'] as double).floor()}百帕',
+                  '气压：${(weather['baro'] as double).floor()}百帕',
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 14,
@@ -90,7 +90,7 @@ class FeelWidget extends StatelessWidget {
                   top: 5,
                 ),
                 child: Text(
-                  '能见度： ${weather['vis']}公里',
+                  '能见度：${weather['vis']}公里',
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 14,
@@ -103,7 +103,7 @@ class FeelWidget extends StatelessWidget {
                   top: 5,
                 ),
                 child: Text(
-                  '空气质量： ${(weather['aqi'] as double).floor()}',
+                  '空气质量：${(weather['aqi'] as double).floor()}',
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 14,

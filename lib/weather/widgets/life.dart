@@ -35,7 +35,7 @@ class LifeWidget extends StatelessWidget {
                   children: [
                     Container(),
                     const Text(
-                      '带伞指数： ',
+                      '带伞指数：',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 14,
@@ -61,7 +61,7 @@ class LifeWidget extends StatelessWidget {
                   children: [
                     Container(),
                     const Text(
-                      '外出指数： ',
+                      '外出指数：',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 14,
@@ -87,7 +87,7 @@ class LifeWidget extends StatelessWidget {
                   children: [
                     Container(),
                     const Text(
-                      '穿衣指数： ',
+                      '穿衣指数：',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 14,
@@ -113,7 +113,7 @@ class LifeWidget extends StatelessWidget {
                   children: [
                     Container(),
                     const Text(
-                      '晾晒指数： ',
+                      '晾晒指数：',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 14,
@@ -139,7 +139,7 @@ class LifeWidget extends StatelessWidget {
                   children: [
                     Container(),
                     const Text(
-                      '垂钓指数： ',
+                      '垂钓指数：',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 14,
@@ -165,7 +165,7 @@ class LifeWidget extends StatelessWidget {
                   children: [
                     Container(),
                     const Text(
-                      '紫外线指数： ',
+                      '紫外线指数：',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 14,
@@ -197,7 +197,7 @@ class LifeWidget extends StatelessWidget {
                   children: [
                     Container(),
                     const Text(
-                      '感冒指数： ',
+                      '感冒指数：',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 14,
@@ -223,7 +223,7 @@ class LifeWidget extends StatelessWidget {
                   children: [
                     Container(),
                     const Text(
-                      '交通指数： ',
+                      '交通指数：',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 14,
@@ -249,7 +249,7 @@ class LifeWidget extends StatelessWidget {
                   children: [
                     Container(),
                     const Text(
-                      '洗车指数： ',
+                      '洗车指数：',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 14,
@@ -275,7 +275,7 @@ class LifeWidget extends StatelessWidget {
                   children: [
                     Container(),
                     const Text(
-                      '中暑指数： ',
+                      '中暑指数：',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 14,
@@ -301,7 +301,7 @@ class LifeWidget extends StatelessWidget {
                   children: [
                     Container(),
                     const Text(
-                      '风冷指数： ',
+                      '风冷指数：',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 14,

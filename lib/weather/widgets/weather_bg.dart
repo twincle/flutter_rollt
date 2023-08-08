@@ -37,7 +37,7 @@ class WeatherBgWidget extends StatelessWidget {
       } else if (now
                   .difference(sunset.add(const Duration(hours: -1)))
                   .inSeconds >=
-              0 ||
+              0 &&
           now.difference(sunset.add(const Duration(minutes: 30))).inSeconds <=
               0) {
         bg =
@@ -64,7 +64,7 @@ class WeatherBgWidget extends StatelessWidget {
       } else if (now
                   .difference(sunset.add(const Duration(hours: -1)))
                   .inSeconds >=
-              0 ||
+              0 &&
           now.difference(sunset.add(const Duration(minutes: 30))).inSeconds <=
               0) {
         bg =
@@ -82,7 +82,7 @@ class WeatherBgWidget extends StatelessWidget {
       } else if (now
                   .difference(sunset.add(const Duration(hours: -1)))
                   .inSeconds >=
-              0 ||
+              0 &&
           now.difference(sunset.add(const Duration(minutes: 30))).inSeconds <=
               0) {
         bg =
