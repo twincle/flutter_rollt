@@ -41,6 +41,15 @@ class BgWidget extends StatelessWidget {
         bg =
             'https://assets.msn.cn/weathermapdata/1/static/background/mobile/Rain-bg.png';
       }
+    } else if (weather.contains('雪')) {
+      if (now.difference(sunset).inSeconds >= 0 ||
+          now.difference(sunrise).inSeconds <= 0) {
+        bg =
+            'https://assets.msn.cn/weathermapdata/1/static/background/mobile/Snow%20Night.png';
+      } else {
+        bg =
+            'https://assets.msn.cn/weathermapdata/1/static/background/mobile/Snow-bg.png';
+      }
     } else if (weather.contains('云')) {
       if (now.difference(sunrise).inSeconds < 0 ||
           now.difference(sunset.add(const Duration(minutes: 30))).inSeconds >
