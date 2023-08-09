@@ -142,6 +142,12 @@ class ArticlesPageController extends GetxController
             vsync: this,
           );
 
+          tabController.addListener(() {
+            if (tabController.animation!.value == tabController.index) {
+              onLoadMore(i: tabController.index);
+            }
+          });
+
           onLoadMore(i: index);
         },
       );
