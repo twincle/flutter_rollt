@@ -1,12 +1,12 @@
 part of weather;
 
-class WeatherIconWidget extends StatelessWidget {
+class IconWidget extends StatelessWidget {
   final String al;
   final Map<String, dynamic> almanac;
   final double? hw;
   final String weather;
 
-  const WeatherIconWidget({
+  const IconWidget({
     super.key,
     this.al = '',
     required this.almanac,
@@ -52,22 +52,7 @@ class WeatherIconWidget extends StatelessWidget {
         icon =
             'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/MostlySunnyDay.svg';
       }
-    } else if (weather == '局部晴朗') {
-      if (al == '早') {
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/D200PartlySunnyV2.svg';
-      } else if (al == '晚') {
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/PartlyCloudyNightV2.svg';
-      } else if (now.difference(sunset).inSeconds >= 0 ||
-          now.difference(sunrise).inSeconds <= 0) {
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/PartlyCloudyNightV2.svg';
-      } else {
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/D200PartlySunnyV2.svg';
-      }
-    } else if (weather == '局部多云') {
+    } else if (weather == '局部晴朗' || weather == '局部多云') {
       if (al == '早') {
         icon =
             'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/D200PartlySunnyV2.svg';
@@ -98,20 +83,8 @@ class WeatherIconWidget extends StatelessWidget {
             'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/MostlyCloudyDayV2.svg';
       }
     } else if (weather == '阴') {
-      if (al == '早') {
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/CloudyV3.svg';
-      } else if (al == '晚') {
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/CloudyV3.svg';
-      } else if (now.difference(sunset).inSeconds >= 0 ||
-          now.difference(sunrise).inSeconds <= 0) {
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/CloudyV3.svg';
-      } else {
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/CloudyV3.svg';
-      }
+      icon =
+          'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/CloudyV3.svg';
     } else if (weather == '小阵雨') {
       if (al == '早') {
         icon =
@@ -158,51 +131,14 @@ class WeatherIconWidget extends StatelessWidget {
             'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/D340TstormsV2.svg';
       }
     } else if (weather == '小雨') {
-      if (al == '早') {
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/LightRainV3.svg';
-      } else if (al == '晚') {
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/LightRainV3.svg';
-      } else if (now.difference(sunset).inSeconds >= 0 ||
-          now.difference(sunrise).inSeconds <= 0) {
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/LightRainV3.svg';
-      } else {
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/LightRainV3.svg';
-      }
+      icon =
+          'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/LightRainV3.svg';
     } else if (weather == '雨') {
-      if (al == '早') {
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/HeavyDrizzle.svg';
-      } else if (al == '晚') {
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/HeavyDrizzle.svg';
-      } else if (now.difference(sunset).inSeconds >= 0 ||
-          now.difference(sunrise).inSeconds <= 0) {
-        // TODO
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/HeavyDrizzle.svg';
-      } else {
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/HeavyDrizzle.svg';
-      }
+      icon =
+          'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/HeavyDrizzle.svg';
     } else if (weather == '大雨') {
-      if (al == '早') {
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/ModerateRainV2.svg';
-      } else if (al == '晚') {
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/ModerateRainV2.svg';
-      } else if (now.difference(sunset).inSeconds >= 0 ||
-          now.difference(sunrise).inSeconds <= 0) {
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/ModerateRainV2.svg';
-      } else {
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/ModerateRainV2.svg';
-      }
+      icon =
+          'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/ModerateRainV2.svg';
     } else if (weather == '小阵雨夹雪') {
       if (al == '早') {
         icon =
@@ -212,7 +148,6 @@ class WeatherIconWidget extends StatelessWidget {
             'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/N311LightRainSnowShowersV2.svg';
       } else if (now.difference(sunset).inSeconds >= 0 ||
           now.difference(sunrise).inSeconds <= 0) {
-        // TODO
         icon =
             'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/N311LightRainSnowShowersV2.svg';
       } else {
@@ -220,21 +155,8 @@ class WeatherIconWidget extends StatelessWidget {
             'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/D311LightRainSnowShowersV2.svg';
       }
     } else if (weather == '雨夹雪' || weather == '小雨夹雪') {
-      if (al == '早') {
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/RainSnowV2.svg';
-      } else if (al == '晚') {
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/RainSnowV2.svg';
-      } else if (now.difference(sunset).inSeconds >= 0 ||
-          now.difference(sunrise).inSeconds <= 0) {
-        // TODO
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/RainSnowV2.svg';
-      } else {
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/RainSnowV2.svg';
-      }
+      icon =
+          'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/RainSnowV2.svg';
     } else if (weather == '小阵雪') {
       if (al == '早') {
         icon =
@@ -266,21 +188,8 @@ class WeatherIconWidget extends StatelessWidget {
             'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/D212LightSnowShowersV2.svg';
       }
     } else if (weather == '小雪') {
-      if (al == '早') {
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/LightSnowV2.svg';
-      } else if (al == '晚') {
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/LightSnowV2.svg';
-      } else if (now.difference(sunset).inSeconds >= 0 ||
-          now.difference(sunrise).inSeconds <= 0) {
-        // TODO
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/LightSnowV2.svg';
-      } else {
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/LightSnowV2.svg';
-      }
+      icon =
+          'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/LightSnowV2.svg';
     } else if (weather == '雪') {
       if (al == '早') {
         icon =
@@ -297,22 +206,8 @@ class WeatherIconWidget extends StatelessWidget {
             'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/Snow.svg';
       }
     } else if (weather == '大雪') {
-      if (al == '早') {
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/HeavySnowV2.svg';
-      } else if (al == '晚') {
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/HeavySnowV2.svg';
-      } else if (now.difference(sunset).inSeconds >= 0 ||
-          now.difference(sunrise).inSeconds <= 0) {
-        // TODO
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/HeavySnowV2.svg';
-      } else {
-        // TODO
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/HeavySnowV2.svg';
-      }
+      icon =
+          'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/HeavySnowV2.svg';
       // } else if (weather == '冰雹') {
       //   if (al == '早') {
       //   icon =
@@ -327,21 +222,8 @@ class WeatherIconWidget extends StatelessWidget {
       //     icon = '';
       //   }
     } else if (weather == '雾') {
-      if (al == '早') {
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/FogV2.svg';
-      } else if (al == '晚') {
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/FogV2.svg';
-      } else if (now.difference(sunset).inSeconds >= 0 ||
-          now.difference(sunrise).inSeconds <= 0) {
-        // TODO
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/FogV2.svg';
-      } else {
-        icon =
-            'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/FogV2.svg';
-      }
+      icon =
+          'https://assets.msn.cn/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/FogV2.svg';
       // } else if (weather == '霾') {
       //   if (al == '早') {
       //   icon = '';
@@ -373,8 +255,8 @@ class WeatherIconWidget extends StatelessWidget {
     return SvgPicture.network(
       icon,
       fit: BoxFit.cover,
-      height: hw ?? 60,
-      width: hw ?? 60,
+      height: hw ?? 80,
+      width: hw ?? 80,
     );
   }
 }

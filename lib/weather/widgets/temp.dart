@@ -14,7 +14,7 @@ class TempWidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              WeatherIconWidget(
+              IconWidget(
                 weather: temp['cap'],
                 almanac: temp['almanac'],
               ),

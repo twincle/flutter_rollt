@@ -27,7 +27,7 @@ class WeatherPage extends GetView<WeatherPageController> {
                     left: 0,
                     right: 0,
                     top: 0,
-                    child: WeatherBgWidget(
+                    child: BgWidget(
                       almanac: controller.weather['almanac'],
                       weather: controller.weather['cap'],
                     ),
@@ -79,7 +79,7 @@ class WeatherPage extends GetView<WeatherPageController> {
                         }(),
                         TempWidget(temp: controller.weather),
                         FeelWidget(weather: controller.weather),
-                        ForeDaysWidget(weather: controller.weather['forecast']),
+                        DailyWidget(weather: controller.weather['forecast']),
                         LifeWidget(life: controller.weather['life']),
                       ],
                     ),

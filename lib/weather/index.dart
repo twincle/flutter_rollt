@@ -15,12 +15,12 @@ part 'pages/weather.dart';
 part 'pages/weathers.dart';
 
 part 'widgets/feel.dart';
-part 'widgets/fore_days.dart';
+part 'widgets/daily.dart';
 part 'widgets/hourly.dart';
 part 'widgets/life.dart';
 part 'widgets/temp.dart';
-part 'widgets/weather_bg.dart';
-part 'widgets/weather_icon.dart';
+part 'widgets/bg.dart';
+part 'widgets/icon.dart';
 
 part 'binding.dart';
 part 'routes.dart';
