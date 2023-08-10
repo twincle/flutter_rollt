@@ -77,9 +77,51 @@ class WeatherPage extends GetView<WeatherPageController> {
                             return Container();
                           }
                         }(),
+                        // const HourlyWidget(temp: {}),
                         TempWidget(temp: controller.weather),
                         FeelWidget(weather: controller.weather),
-                        DailyWidget(weather: controller.weather['forecast']),
+                        // DailyWidget(weather: controller.weather['forecast']),
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.white24,
+                            ),
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(5),
+                            ),
+                            color: Colors.white10,
+                          ),
+                          margin: const EdgeInsets.only(
+                            bottom: 15,
+                          ),
+                          height: 250,
+                          child: DefaultTabController(
+                            length: 2,
+                            child: Scaffold(
+                              appBar: const PreferredSize(
+                                preferredSize: Size.fromHeight(42),
+                                child: TabBar(
+                                  isScrollable: true,
+                                  labelColor: Colors.white,
+                                  tabs: [
+                                    Tab(text: '24小时天气预报'),
+                                    Tab(text: '10天天气预报'),
+                                  ],
+                                  unselectedLabelColor: Colors.white54,
+                                ),
+                              ),
+                              backgroundColor: Colors.transparent,
+                              body: TabBarView(
+                                children: [
+                                  Container(),
+                                  DailyWidget(
+                                    weather: controller.weather['forecast'],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
                         LifeWidget(life: controller.weather['life']),
                       ],
                     ),
@@ -104,6 +146,8 @@ class WeatherPageController extends GetxController {
   Map<String, dynamic> _w = {};
   Map<String, dynamic> weather = {};
 
+  List<dynamic> _d = [];
+
   @override
   void onInit() {
     super.onInit();
@@ -126,6 +170,14 @@ class WeatherPageController extends GetxController {
         _w = (value.data as Map<String, dynamic>)['responses'][0]['weather'][0];
 
         onWeather();
+        return getDailyWeatherService(
+          lat: location['latitude'],
+          lon: location['longitude'],
+        );
+      }).then((value) {
+        _d = (value.data as Map<String, dynamic>)['value'][0]['responses'][0]
+            ['average'][0]['days'];
+
         isLoading = false;
         update();
       });
@@ -165,6 +217,7 @@ class WeatherPageController extends GetxController {
       'temp': _w['current']['temp'],
       'cap': _w['current']['cap'],
       'forecast': _w['forecast']['days'],
+      'daily': _d,
       'dayw': _w['forecast']['days'][0]['daily']['day']['cap'],
       'nightw': _w['forecast']['days'][0]['daily']['night']['cap'],
       'isDnSame': _w['forecast']['days'][0]['daily']['day']['cap'] ==

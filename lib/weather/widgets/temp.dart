@@ -10,7 +10,7 @@ class TempWidget extends StatelessWidget {
     return Column(
       children: [
         Container(
-          padding: const EdgeInsets.all(15),
+          padding: const EdgeInsets.fromLTRB(0, 50, 0, 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -24,7 +24,7 @@ class TempWidget extends StatelessWidget {
                   '${(temp['temp'] as double).floor()}',
                   style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 80,
+                    fontSize: 100,
                   ),
                 ),
               ),
@@ -52,7 +52,7 @@ class TempWidget extends StatelessWidget {
         ),
         Container(
           padding: const EdgeInsets.only(
-            bottom: 30,
+            bottom: 120,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
