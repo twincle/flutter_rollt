@@ -13,26 +13,21 @@ class ArticlesPage extends GetView<ArticlesPageController> {
           ),
           body: () {
             if (controller.isLoadingUserTags) {
-              return Container();
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
             } else {
               return Scaffold(
-                appBar: PreferredSize(
-                  preferredSize: const Size.fromHeight(40),
-                  child: AppBar(
-                    backgroundColor: Colors.white,
-                    elevation: 1,
-                    title: TabBar(
-                      controller: controller.tabController,
-                      indicator: const BoxDecoration(
-                        color: primaryColor,
-                      ),
-                      isScrollable: true,
-                      labelColor: Colors.white,
-                      tabs: controller.tabs,
-                      unselectedLabelColor: primaryColor,
-                      onTap: (i) => controller.onLoadMore(i: i),
-                    ),
+                appBar: TabBar(
+                  controller: controller.tabController,
+                  indicator: const BoxDecoration(
+                    color: primaryColor,
                   ),
+                  isScrollable: true,
+                  labelColor: Colors.white,
+                  tabs: controller.tabs,
+                  unselectedLabelColor: primaryColor,
+                  onTap: (i) => controller.onLoadMore(i: i),
                 ),
                 body: TabBarView(
                   controller: controller.tabController,
