@@ -18,7 +18,7 @@ class DailyWidget extends StatelessWidget {
     };
 
     return Container(
-      padding: const EdgeInsets.fromLTRB(0, 15, 0, 10),
+      padding: const EdgeInsets.fromLTRB(0, 12, 0, 0),
       child: ListView(
         children: [
           // Container(

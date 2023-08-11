@@ -216,6 +216,7 @@ class WeatherPageController extends GetxController {
       'almanac': _w['forecast']['days'][0]['almanac'],
       'temp': _w['current']['temp'],
       'cap': _w['current']['cap'],
+      'nowcasting': _w['nowcasting'],
       'forecast': _w['forecast']['days'],
       'daily': _d,
       'dayw': _w['forecast']['days'][0]['daily']['day']['cap'],

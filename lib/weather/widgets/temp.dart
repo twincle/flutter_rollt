@@ -52,7 +52,7 @@ class TempWidget extends StatelessWidget {
         ),
         Container(
           padding: const EdgeInsets.only(
-            bottom: 120,
+            bottom: 20,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -79,6 +79,17 @@ class TempWidget extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+        ),
+        Container(
+          padding: const EdgeInsets.only(
+            bottom: 120,
+          ),
+          child: Text(
+            temp['nowcasting']['taskbarSummary'],
+            style: const TextStyle(
+              color: Colors.white,
+            ),
           ),
         ),
       ],
