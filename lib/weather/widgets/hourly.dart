@@ -19,7 +19,7 @@ class HourlyWidget extends StatefulWidget {
 class _HourlyWidgetState extends State<HourlyWidget> {
   late double hi, lo;
   late double y;
-  final List<FlSpot> fs = [];
+  final Map<String, FlSpot> fs = {};
 
   double barSpotX = 0;
   Widget axisTitle = Container();
@@ -36,17 +36,26 @@ class _HourlyWidgetState extends State<HourlyWidget> {
     double minY = double.infinity;
     double tempHi = -283, tempLo = 100;
 
-    void processData(double temp) {
+    void processData(String timeStr, double temp) {
       index++;
-
-      fs.add(FlSpot(index, temp));
 
       if (temp < minY) minY = temp;
       if (temp > tempHi) tempHi = temp;
       if (temp < tempLo) tempLo = temp;
+
+      if (timeStr == '现在') {
+        return fs.addAll({timeStr: FlSpot(index, temp)});
+      }
+
+      int time = DateTime.parse('${timeStr.substring(0, 19)}Z').hour;
+
+      fs.addAll({
+        '$time:00-${time + 1 >= 24 ? time + 1 - 24 : time + 1}:00':
+            FlSpot(index, temp)
+      });
     }
 
-    processData(widget.current['temp']);
+    processData('现在', widget.current['temp']);
 
     for (int i = 0; i < widget.forecast.length; i++) {
       List<dynamic> h = (widget.forecast[i]['hourly'] ?? []) as List<dynamic>;
@@ -55,7 +64,7 @@ class _HourlyWidgetState extends State<HourlyWidget> {
         for (int j = 0; j < h.length; j++) {
           double k = h[j]['temp'];
 
-          processData(k);
+          processData(h[j]['valid'], k);
         }
       }
     }
@@ -141,11 +150,11 @@ class _HourlyWidgetState extends State<HourlyWidget> {
     return Column(
       children: [
         Container(
-          height: 55,
+          height: 65,
           // child: axisTitleWidgets(),
         ),
         SizedBox(
-          height: 150,
+          height: 140,
           child: LineChart(
             LineChartData(
               borderData: FlBorderData(show: false),
@@ -153,19 +162,34 @@ class _HourlyWidgetState extends State<HourlyWidget> {
               lineBarsData: [
                 LineChartBarData(
                   barWidth: 2,
-                  color: Colors.yellow.shade200,
+                  belowBarData: BarAreaData(
+                    show: true,
+                    gradient: LinearGradient(
+                      colors: <Color>[
+                        Colors.yellow.shade300,
+                        Colors.yellow.shade50,
+                      ],
+                    ),
+                  ),
                   dotData: const FlDotData(show: false),
+                  gradient: LinearGradient(
+                    colors: <Color>[
+                      Colors.yellow.shade300,
+                      Colors.yellow.shade50,
+                    ],
+                  ),
                   isCurved: true,
-                  spots: fs,
+                  spots: fs.values.toList(),
                 ),
               ],
               lineTouchData: LineTouchData(
                 touchTooltipData: LineTouchTooltipData(
-                  tooltipBgColor: Colors.yellow.shade200,
+                  tooltipBgColor: Colors.yellow.shade300,
                   getTooltipItems: (List<LineBarSpot> touchedBarSpots) {
                     return touchedBarSpots.map((barSpot) {
                       TextStyle textStyle = const TextStyle(
                         color: Colors.black87,
+                        fontSize: 12,
                       );
 
                       // setState(() {
@@ -175,17 +199,17 @@ class _HourlyWidgetState extends State<HourlyWidget> {
 
                       if (barSpot.y == hi) {
                         return LineTooltipItem(
-                          '最高：${barSpot.y.toInt()}℃',
+                          '${fs.keys.toList()[barSpot.spotIndex]}\n最高：${barSpot.y.toInt()}℃',
                           textStyle,
                         );
                       } else if (barSpot.y == lo) {
                         return LineTooltipItem(
-                          '最低：${barSpot.y.toInt()}℃',
+                          '${fs.keys.toList()[barSpot.spotIndex]}\n最低：${barSpot.y.toInt()}℃',
                           textStyle,
                         );
                       } else {
                         return LineTooltipItem(
-                          '${barSpot.y.toInt()}℃',
+                          '${fs.keys.toList()[barSpot.spotIndex]}\n${barSpot.y.toInt()}℃',
                           textStyle,
                         );
                       }

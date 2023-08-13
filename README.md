@@ -19,8 +19,11 @@
 ## 如何编译
 
 flutter build windows 或
+
 flutter build apk 或
+
 flutter build chrome 或
+
 flutter build edge
 
 MacOS、iOS、Linux 我没用过
