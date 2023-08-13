@@ -29,7 +29,7 @@ class WeatherPage extends GetView<WeatherPageController> {
                     top: 0,
                     child: BgWidget(
                       almanac: controller.weather['almanac'],
-                      weather: controller.weather['cap'],
+                      cap: controller.weather['cap'],
                     ),
                   ),
                   Container(
@@ -78,7 +78,7 @@ class WeatherPage extends GetView<WeatherPageController> {
                           }
                         }(),
                         // const HourlyWidget(temp: {}),
-                        TempWidget(temp: controller.weather),
+                        TempWidget(weather: controller.weather),
                         FeelWidget(weather: controller.weather),
                         // DailyWidget(weather: controller.weather['forecast']),
                         Container(
@@ -113,9 +113,13 @@ class WeatherPage extends GetView<WeatherPageController> {
                               backgroundColor: Colors.transparent,
                               body: TabBarView(
                                 children: [
-                                  Container(),
+                                  HourlyWidget(
+                                    almanac: controller.weather['almanac'],
+                                    current: controller.weather['current'],
+                                    forecast: controller.weather['forecast'],
+                                  ),
                                   DailyWidget(
-                                    weather: controller.weather['forecast'],
+                                    forecast: controller.weather['forecast'],
                                   ),
                                 ],
                               ),
@@ -214,6 +218,7 @@ class WeatherPageController extends GetxController {
   void onWeather() {
     weather = {
       'almanac': _w['forecast']['days'][0]['almanac'],
+      'current': _w['current'],
       'temp': _w['current']['temp'],
       'cap': _w['current']['cap'],
       'nowcasting': _w['nowcasting'],

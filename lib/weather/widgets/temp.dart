@@ -1,12 +1,15 @@
 part of weather;
 
 class TempWidget extends StatelessWidget {
-  final Map<String, dynamic> temp;
+  final Map<String, dynamic> weather;
 
-  const TempWidget({super.key, required this.temp});
+  const TempWidget({super.key, required this.weather});
 
   @override
   Widget build(BuildContext context) {
+    String str = weather['nowcasting']['summary'];
+    str = str.substring(0, str.length - 1);
+
     return Column(
       children: [
         Container(
@@ -15,13 +18,13 @@ class TempWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               IconWidget(
-                weather: temp['cap'],
-                almanac: temp['almanac'],
+                cap: weather['cap'],
+                almanac: weather['almanac'],
               ),
               Container(
                 margin: const EdgeInsets.fromLTRB(30, 0, 20, 0),
                 child: Text(
-                  '${(temp['temp'] as double).floor()}',
+                  '${(weather['temp'] as double).floor()}',
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 100,
@@ -39,7 +42,7 @@ class TempWidget extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    temp['cap'],
+                    weather['cap'],
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,
@@ -58,21 +61,21 @@ class TempWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                temp['dayw'],
+                weather['dayw'],
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,
                 ),
               ),
               Text(
-                temp['isDnSame'] ? '' : '转${temp['nightw']}',
+                weather['isDnSame'] ? '' : '转${weather['nightw']}',
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,
                 ),
               ),
               Text(
-                '    ${(temp['tempHi'] as double).floor()}℃ / ${(temp['tempLo'] as double).floor()}℃',
+                '    ${(weather['tempHi'] as double).floor()}℃ / ${(weather['tempLo'] as double).floor()}℃',
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,
@@ -86,7 +89,7 @@ class TempWidget extends StatelessWidget {
             bottom: 120,
           ),
           child: Text(
-            temp['nowcasting']['taskbarSummary'],
+            str,
             style: const TextStyle(
               color: Colors.white,
             ),

@@ -10,7 +10,9 @@
 ## 依赖项目
 
 - dio: ^5.2.0+1
+- fl_chart: ^0.63.0
 - flutter_html: ^3.0.0-beta.2
+- flutter_svg: ^2.0.7
 - get: ^4.6.5
 - get_storage: ^2.1.1
 
