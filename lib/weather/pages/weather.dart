@@ -77,10 +77,8 @@ class WeatherPage extends GetView<WeatherPageController> {
                             return Container();
                           }
                         }(),
-                        // const HourlyWidget(temp: {}),
                         TempWidget(weather: controller.weather),
                         FeelWidget(weather: controller.weather),
-                        // DailyWidget(weather: controller.weather['forecast']),
                         Container(
                           decoration: BoxDecoration(
                             border: Border.all(

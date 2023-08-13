@@ -7,6 +7,11 @@ class LifeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextStyle textStyle = const TextStyle(
+      color: Colors.white,
+      fontSize: 14,
+    );
+
     return Container(
       decoration: BoxDecoration(
         border: Border.all(
@@ -25,298 +30,68 @@ class LifeWidget extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                padding: const EdgeInsets.only(
-                  bottom: 5,
-                  top: 5,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(),
-                    const Text(
-                      '带伞指数：',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                      ),
-                    ),
-                    Text(
-                      '${life['umbrellaIndex']['summary']}',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ],
-                ),
+              const SizedBox(height: 5),
+              Text(
+                '带伞指数：${life['umbrellaIndex']['summary']}',
+                style: textStyle,
               ),
-              Container(
-                padding: const EdgeInsets.only(
-                  bottom: 5,
-                  top: 5,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(),
-                    const Text(
-                      '外出指数：',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                      ),
-                    ),
-                    Text(
-                      '${life['outdoorIndex']['summary']}',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ],
-                ),
+              const SizedBox(height: 10),
+              Text(
+                '外出指数：${life['outdoorIndex']['summary']}',
+                style: textStyle,
               ),
-              Container(
-                padding: const EdgeInsets.only(
-                  bottom: 5,
-                  top: 5,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(),
-                    const Text(
-                      '穿衣指数：',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                      ),
-                    ),
-                    Text(
-                      '${life['dressingIndex']['summary']}',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ],
-                ),
+              const SizedBox(height: 10),
+              Text(
+                '穿衣指数：${life['dressingIndex']['summary']}',
+                style: textStyle,
               ),
-              Container(
-                padding: const EdgeInsets.only(
-                  bottom: 5,
-                  top: 5,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(),
-                    const Text(
-                      '晾晒指数：',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                      ),
-                    ),
-                    Text(
-                      '${life['dryingIndex']['summary']}',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ],
-                ),
+              const SizedBox(height: 10),
+              Text(
+                '晾晒指数：${life['dryingIndex']['summary']}',
+                style: textStyle,
               ),
-              Container(
-                padding: const EdgeInsets.only(
-                  bottom: 5,
-                  top: 5,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(),
-                    const Text(
-                      '垂钓指数：',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                      ),
-                    ),
-                    Text(
-                      '${life['fishingIndex']['summary']}',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ],
-                ),
+              const SizedBox(height: 10),
+              Text(
+                '垂钓指数：${life['fishingIndex']['summary']}',
+                style: textStyle,
               ),
-              Container(
-                padding: const EdgeInsets.only(
-                  bottom: 5,
-                  top: 5,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(),
-                    const Text(
-                      '紫外线指数：',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                      ),
-                    ),
-                    Text(
-                      '${life['uvIndex']['summary']}',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ],
-                ),
+              const SizedBox(height: 10),
+              Text(
+                '紫外线指数：${life['uvIndex']['summary']}',
+                style: textStyle,
               ),
+              const SizedBox(height: 5),
             ],
           ),
           Column(
-            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                padding: const EdgeInsets.only(
-                  bottom: 5,
-                  top: 5,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(),
-                    const Text(
-                      '感冒指数：',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                      ),
-                    ),
-                    Text(
-                      '${life['coldIndex']['summary']}',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ],
-                ),
+              const SizedBox(height: 5),
+              Text(
+                '感冒指数：${life['coldIndex']['summary']}',
+                style: textStyle,
               ),
-              Container(
-                padding: const EdgeInsets.only(
-                  bottom: 5,
-                  top: 5,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(),
-                    const Text(
-                      '交通指数：',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                      ),
-                    ),
-                    Text(
-                      '${life['trafficIndex']['summary']}',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ],
-                ),
+              const SizedBox(height: 10),
+              Text(
+                '交通指数：${life['trafficIndex']['summary']}',
+                style: textStyle,
               ),
-              Container(
-                padding: const EdgeInsets.only(
-                  bottom: 5,
-                  top: 5,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(),
-                    const Text(
-                      '洗车指数：',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                      ),
-                    ),
-                    Text(
-                      '${life['carWashingIndex']['summary']}',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ],
-                ),
+              const SizedBox(height: 10),
+              Text(
+                '洗车指数：${life['carWashingIndex']['summary']}',
+                style: textStyle,
               ),
-              Container(
-                padding: const EdgeInsets.only(
-                  bottom: 5,
-                  top: 5,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(),
-                    const Text(
-                      '中暑指数：',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                      ),
-                    ),
-                    Text(
-                      '${life['heatIndex']['summary']}',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ],
-                ),
+              const SizedBox(height: 10),
+              Text(
+                '中暑指数：${life['heatIndex']['summary']}',
+                style: textStyle,
               ),
-              Container(
-                padding: const EdgeInsets.only(
-                  bottom: 5,
-                  top: 5,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(),
-                    const Text(
-                      '风冷指数：',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                      ),
-                    ),
-                    Text(
-                      '${life['windChillIndex']['summary']}',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ],
-                ),
+              const SizedBox(height: 10),
+              Text(
+                '风冷指数：${life['windChillIndex']['summary']}',
+                style: textStyle,
               ),
+              const SizedBox(height: 5),
             ],
           ),
         ],

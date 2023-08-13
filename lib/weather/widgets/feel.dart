@@ -27,87 +27,58 @@ class FeelWidget extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                padding: const EdgeInsets.only(
-                  bottom: 5,
-                  top: 5,
-                ),
-                child: Text(
-                  '湿度：${(weather['rh'] as double).floor()}%',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                  ),
+              const SizedBox(height: 5),
+              Text(
+                '湿度：${(weather['rh'] as double).floor()}%',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
                 ),
               ),
-              Container(
-                padding: const EdgeInsets.only(
-                  bottom: 5,
-                  top: 5,
-                ),
-                child: Text(
-                  '体感：${(weather['feels'] as double).floor()}℃',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                  ),
+              const SizedBox(height: 10),
+              Text(
+                '体感：${(weather['feels'] as double).floor()}℃',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
                 ),
               ),
-              Container(
-                padding: const EdgeInsets.only(
-                  bottom: 5,
-                  top: 5,
-                ),
-                child: Text(
-                  '风速：${weather['pvdrWindDir']}${weather['pvdrWindSpd']}',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                  ),
+              const SizedBox(height: 10),
+              Text(
+                '风速：${weather['pvdrWindDir']}${weather['pvdrWindSpd']}',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
                 ),
               ),
+              const SizedBox(height: 5),
             ],
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                padding: const EdgeInsets.only(
-                  bottom: 5,
-                  top: 5,
-                ),
-                child: Text(
-                  '气压：${(weather['baro'] as double).floor()}百帕',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                  ),
+              const SizedBox(height: 5),
+              Text(
+                '气压：${(weather['baro'] as double).floor()}百帕',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
                 ),
               ),
-              Container(
-                padding: const EdgeInsets.only(
-                  bottom: 5,
-                  top: 5,
-                ),
-                child: Text(
-                  '能见度：${weather['vis']}公里',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                  ),
+              const SizedBox(height: 10),
+              Text(
+                '能见度：${weather['vis']}公里',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
                 ),
               ),
-              Container(
-                padding: const EdgeInsets.only(
-                  bottom: 5,
-                  top: 5,
-                ),
-                child: Text(
-                  '空气质量：${(weather['aqi'] as double).floor()}',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                  ),
+              const SizedBox(height: 10),
+              Text(
+                '空气质量：${(weather['aqi'] as double).floor()}',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
                 ),
               ),
             ],

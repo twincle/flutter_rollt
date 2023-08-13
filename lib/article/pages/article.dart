@@ -27,20 +27,19 @@ class ArticlePage extends GetView<ArticlePageController> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                    child: Row(
-                      children: [
-                        Text(controller.article.channelName!),
-                        const Text('  '),
-                        Text(controller.article.source!),
-                        const Text('  '),
-                        Text(controller.article.author!),
-                        const Text('  '),
-                        Text(controller.article.docpubTime!),
-                      ],
-                    ),
+                  const SizedBox(height: 15),
+                  Row(
+                    children: [
+                      Text(controller.article.channelName!),
+                      const Text('  '),
+                      Text(controller.article.source!),
+                      const Text('  '),
+                      Text(controller.article.author!),
+                      const Text('  '),
+                      Text(controller.article.docpubTime!),
+                    ],
                   ),
+                  const SizedBox(height: 15),
                   () {
                     if (controller.detail.appendixUrl.isNotEmpty) {
                       return Image.network(controller.detail.appendixUrl);
@@ -50,17 +49,6 @@ class ArticlePage extends GetView<ArticlePageController> {
                   }(),
                   Html(
                     data: controller.detail.content,
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(
-                      top: 10,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(controller.article.docpubTime!),
-                      ],
-                    ),
                   ),
                 ],
               );

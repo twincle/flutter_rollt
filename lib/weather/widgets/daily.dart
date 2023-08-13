@@ -16,6 +16,10 @@ class DailyWidget extends StatelessWidget {
       6: '周六',
       7: '周日',
     };
+    TextStyle textStyle = const TextStyle(
+      color: Colors.white,
+      fontSize: 14,
+    );
 
     return Container(
       padding: const EdgeInsets.fromLTRB(0, 12, 0, 0),
@@ -38,51 +42,33 @@ class DailyWidget extends StatelessWidget {
                         now.day == dt.day
                             ? '今日'
                             : '${dt.day}日${week[dt.weekday]}',
-                        style: const TextStyle(
-                          color: Colors.white,
-                        ),
+                        style: textStyle,
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+                      const SizedBox(height: 10),
                       IconWidget(
                         al: '早',
                         almanac: e['almanac'],
                         hw: 25,
                         cap: e['daily']['day']['cap'],
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+                      const SizedBox(height: 10),
                       Text(
                         '${(e['daily']['tempHi'] as double).floor()}℃',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                        ),
+                        style: textStyle,
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+                      const SizedBox(height: 10),
                       Text(
                         '${(e['daily']['tempLo'] as double).floor()}℃',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                        ),
+                        style: textStyle,
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+                      const SizedBox(height: 10),
                       IconWidget(
                         al: '晚',
                         almanac: e['almanac'],
                         hw: 25,
                         cap: e['daily']['night']['cap'],
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+                      const SizedBox(height: 10),
                       Row(
                         children: [
                           const Icon(
@@ -90,15 +76,10 @@ class DailyWidget extends StatelessWidget {
                             color: Colors.white,
                             size: 14,
                           ),
-                          const SizedBox(
-                            width: 5,
-                          ),
+                          const SizedBox(width: 5),
                           Text(
                             '${(e['daily']['precip'] as double).floor()}%',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                            ),
+                            style: textStyle,
                           ),
                         ],
                       ),

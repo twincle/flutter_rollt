@@ -21,8 +21,8 @@ class _HourlyWidgetState extends State<HourlyWidget> {
   late double y;
   final Map<String, FlSpot> fs = {};
 
-  double barSpotX = 0;
-  Widget axisTitle = Container();
+  // double barSpotX = 0;
+  // Widget axisTitle = Container();
 
   @override
   void initState() {
@@ -74,8 +74,9 @@ class _HourlyWidgetState extends State<HourlyWidget> {
     lo = tempLo;
 
     // setState(() {
-    // axisTitle = axisTitleWidgets(1);
+    // axisTitle = axisTitleWidgets();
     // });
+    // return axisTitleWidgets();
   }
 
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
@@ -113,37 +114,37 @@ class _HourlyWidgetState extends State<HourlyWidget> {
     );
   }
 
-  Widget axisTitleWidgets() {
-    TextStyle textStyle = const TextStyle(
-      color: Colors.white,
-      fontSize: 30,
-    );
-    Widget current = Row(
-      children: [
-        const SizedBox(width: 15),
-        IconWidget(
-          almanac: widget.almanac,
-          cap: widget.current['cap'],
-          hw: 30,
-        ),
-        const SizedBox(width: 15),
-        Text(
-          '${(widget.current['temp'] as double).floor()}',
-          style: textStyle,
-        ),
-      ],
-    );
+  // Widget axisTitleWidget() {
+  //   TextStyle textStyle = const TextStyle(
+  //     color: Colors.white,
+  //     fontSize: 30,
+  //   );
+  //   Widget current = Row(
+  //     children: [
+  //       const SizedBox(width: 15),
+  //       IconWidget(
+  //         almanac: widget.almanac,
+  //         cap: widget.current['cap'],
+  //         hw: 30,
+  //       ),
+  //       const SizedBox(width: 15),
+  //       Text(
+  //         '${(widget.current['temp'] as double).floor()}',
+  //         style: textStyle,
+  //       ),
+  //     ],
+  //   );
 
-    try {
-      if (barSpotX == 1) {
-        return current;
-      } else {
-        return Container();
-      }
-    } catch (e) {
-      return current;
-    }
-  }
+  //   try {
+  //     if (barSpotX == 1) {
+  //       return current;
+  //     } else {
+  //       return Container();
+  //     }
+  //   } catch (e) {
+  //     return current;
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -151,7 +152,7 @@ class _HourlyWidgetState extends State<HourlyWidget> {
       children: [
         Container(
           height: 65,
-          // child: axisTitleWidgets(),
+          // child: axisTitleWidget(),
         ),
         SizedBox(
           height: 140,
@@ -197,19 +198,21 @@ class _HourlyWidgetState extends State<HourlyWidget> {
                       // barSpotX = barSpot.x;
                       // });
 
+                      String time = fs.keys.toList()[barSpot.spotIndex];
+                      int temp = barSpot.y.toInt();
                       if (barSpot.y == hi) {
                         return LineTooltipItem(
-                          '${fs.keys.toList()[barSpot.spotIndex]}\n最高：${barSpot.y.toInt()}℃',
+                          '$time\n最高：$temp℃',
                           textStyle,
                         );
                       } else if (barSpot.y == lo) {
                         return LineTooltipItem(
-                          '${fs.keys.toList()[barSpot.spotIndex]}\n最低：${barSpot.y.toInt()}℃',
+                          '$time\n最低：$temp℃',
                           textStyle,
                         );
                       } else {
                         return LineTooltipItem(
-                          '${fs.keys.toList()[barSpot.spotIndex]}\n${barSpot.y.toInt()}℃',
+                          '$time\n$temp℃',
                           textStyle,
                         );
                       }
@@ -240,7 +243,7 @@ class _HourlyWidgetState extends State<HourlyWidget> {
                   ),
                 ),
                 topTitles: const AxisTitles(
-                  // axisNameWidget: axisTitle,
+                  // axisNameWidget: axisTitleWidget,
                   // axisNameWidget: Container(),
                   // axisNameSize: 15,
                   sideTitles: SideTitles(
