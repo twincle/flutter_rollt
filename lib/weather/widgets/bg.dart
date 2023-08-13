@@ -1,10 +1,10 @@
 part of weather;
 
 class BgWidget extends StatelessWidget {
-  final String weather;
+  final String cap;
   final Map<String, dynamic> almanac;
 
-  const BgWidget({super.key, required this.weather, required this.almanac});
+  const BgWidget({super.key, required this.cap, required this.almanac});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class BgWidget extends StatelessWidget {
     final sunrise = DateTime.parse(almanac['sunrise']!);
     final sunset = DateTime.parse(almanac['sunset']!);
 
-    if (weather.contains('晴')) {
+    if (cap.contains('晴')) {
       if (now.difference(sunrise).inSeconds < 0 ||
           now.difference(sunset.add(const Duration(minutes: 30))).inSeconds >
               0) {
@@ -32,7 +32,7 @@ class BgWidget extends StatelessWidget {
         bg =
             'https://assets.msn.cn/weathermapdata/1/static/background/mobile/Sunny-bg.png';
       }
-    } else if (weather.contains('雨')) {
+    } else if (cap.contains('雨')) {
       if (now.difference(sunset).inSeconds >= 0 ||
           now.difference(sunrise).inSeconds <= 0) {
         bg =
@@ -41,7 +41,7 @@ class BgWidget extends StatelessWidget {
         bg =
             'https://assets.msn.cn/weathermapdata/1/static/background/mobile/Rain-bg.png';
       }
-    } else if (weather.contains('雪')) {
+    } else if (cap.contains('雪')) {
       if (now.difference(sunset).inSeconds >= 0 ||
           now.difference(sunrise).inSeconds <= 0) {
         bg =
@@ -50,7 +50,7 @@ class BgWidget extends StatelessWidget {
         bg =
             'https://assets.msn.cn/weathermapdata/1/static/background/mobile/Snow-bg.png';
       }
-    } else if (weather.contains('云')) {
+    } else if (cap.contains('云')) {
       if (now.difference(sunrise).inSeconds < 0 ||
           now.difference(sunset.add(const Duration(minutes: 30))).inSeconds >
               0) {
@@ -68,7 +68,7 @@ class BgWidget extends StatelessWidget {
         bg =
             'https://assets.msn.cn/weathermapdata/1/static/background/mobile/partlySunny_cloud.png';
       }
-    } else if (weather.contains('阴')) {
+    } else if (cap.contains('阴')) {
       if (now.difference(sunrise).inSeconds < 0 ||
           now.difference(sunset.add(const Duration(minutes: 30))).inSeconds >
               0) {
