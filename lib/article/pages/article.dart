@@ -36,6 +36,7 @@ class ArticlePage extends GetView<ArticlePageController> {
                         Text(controller.article.source!),
                         const Text('  '),
                         Text(controller.article.author!),
+                        const Text('  '),
                         Text(controller.article.docpubTime!),
                       ],
                     ),
