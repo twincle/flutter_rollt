@@ -19,7 +19,7 @@ class HourlyWidget extends StatefulWidget {
 class _HourlyWidgetState extends State<HourlyWidget> {
   late double hi, lo;
   late double y;
-  final Map<String, FlSpot> fs = {};
+  final List<dynamic> fs = [];
 
   // double barSpotX = 0;
   // Widget axisTitle = Container();
@@ -36,7 +36,7 @@ class _HourlyWidgetState extends State<HourlyWidget> {
     double minY = double.infinity;
     double tempHi = -283, tempLo = 100;
 
-    void processData(String timeStr, double temp) {
+    void processData(String cap, String timeStr, double temp) {
       index++;
 
       if (temp < minY) minY = temp;
@@ -44,27 +44,30 @@ class _HourlyWidgetState extends State<HourlyWidget> {
       if (temp < tempLo) tempLo = temp;
 
       if (timeStr == '现在') {
-        return fs.addAll({timeStr: FlSpot(index, temp)});
+        return fs.add([cap, timeStr, FlSpot(index, temp)]);
       }
 
       int time = DateTime.parse('${timeStr.substring(0, 19)}Z').hour;
 
-      fs.addAll({
-        '$time:00-${time + 1 >= 24 ? time + 1 - 24 : time + 1}:00':
-            FlSpot(index, temp)
-      });
+      fs.add([
+        cap,
+        // '$time:00-${time + 1 >= 24 ? time + 1 - 24 : time + 1}:00',
+        '$time点后',
+        FlSpot(index, temp)
+      ]);
     }
 
-    processData('现在', widget.current['temp']);
+    processData(widget.current['cap'], '现在', widget.current['temp']);
 
     for (int i = 0; i < widget.forecast.length; i++) {
       List<dynamic> h = (widget.forecast[i]['hourly'] ?? []) as List<dynamic>;
 
       if (h.isNotEmpty) {
         for (int j = 0; j < h.length; j++) {
-          double k = h[j]['temp'];
+          String cap = h[j]['cap'];
+          double temp = h[j]['temp'];
 
-          processData(h[j]['valid'], k);
+          processData(cap, h[j]['valid'], temp);
         }
       }
     }
@@ -180,7 +183,7 @@ class _HourlyWidgetState extends State<HourlyWidget> {
                     ],
                   ),
                   isCurved: true,
-                  spots: fs.values.toList(),
+                  spots: fs.map((e) => e[2] as FlSpot).toList(),
                 ),
               ],
               lineTouchData: LineTouchData(
@@ -198,21 +201,26 @@ class _HourlyWidgetState extends State<HourlyWidget> {
                       // barSpotX = barSpot.x;
                       // });
 
-                      String time = fs.keys.toList()[barSpot.spotIndex];
+                      String cap = fs
+                          .map((e) => e[0] as String)
+                          .toList()[barSpot.spotIndex];
+                      // String time = fs
+                      //     .map((e) => e[1] as String)
+                      //     .toList()[barSpot.spotIndex];
                       int temp = barSpot.y.toInt();
                       if (barSpot.y == hi) {
                         return LineTooltipItem(
-                          '$time\n最高：$temp℃',
+                          '$cap\n最高：$temp℃',
                           textStyle,
                         );
                       } else if (barSpot.y == lo) {
                         return LineTooltipItem(
-                          '$time\n最低：$temp℃',
+                          '$cap\n最低：$temp℃',
                           textStyle,
                         );
                       } else {
                         return LineTooltipItem(
-                          '$time\n$temp℃',
+                          '$cap\n$temp℃',
                           textStyle,
                         );
                       }
