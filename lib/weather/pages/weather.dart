@@ -79,6 +79,7 @@ class WeatherPage extends GetView<WeatherPageController> {
                         }(),
                         TempWidget(weather: controller.weather),
                         FeelWidget(weather: controller.weather),
+                        const SizedBox(height: 15),
                         Container(
                           decoration: BoxDecoration(
                             border: Border.all(
@@ -88,9 +89,6 @@ class WeatherPage extends GetView<WeatherPageController> {
                               Radius.circular(5),
                             ),
                             color: Colors.white10,
-                          ),
-                          margin: const EdgeInsets.only(
-                            bottom: 15,
                           ),
                           height: 250,
                           child: DefaultTabController(
@@ -124,7 +122,9 @@ class WeatherPage extends GetView<WeatherPageController> {
                             ),
                           ),
                         ),
+                        const SizedBox(height: 15),
                         LifeWidget(life: controller.weather['life']),
+                        const SizedBox(height: 15),
                       ],
                     ),
                   ),

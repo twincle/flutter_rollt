@@ -17,9 +17,6 @@ class FeelWidget extends StatelessWidget {
         ),
         color: Colors.white10,
       ),
-      margin: const EdgeInsets.only(
-        bottom: 15,
-      ),
       padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
