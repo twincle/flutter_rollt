@@ -65,38 +65,45 @@ class SearchPage extends GetView<SearchPageController> {
                             ),
                             margin: const EdgeInsets.only(top: 5),
                             padding: const EdgeInsets.fromLTRB(15, 5, 15, 8),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      e['addrDetailStr'],
-                                      style: const TextStyle(
-                                        fontSize: 18,
+                            child: InkWell(
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        e['addrDetailStr'],
+                                        style: const TextStyle(
+                                          fontSize: 18,
+                                        ),
                                       ),
-                                    ),
-                                    () {
-                                      if (e['addrStr'] == '') {
-                                        return Container();
-                                      } else {
-                                        return Container(
-                                          padding:
-                                              const EdgeInsets.only(top: 3),
-                                          child: Text(
-                                            e['addrStr'],
-                                            style: const TextStyle(
-                                              fontSize: 14,
+                                      () {
+                                        if (e['addrStr'] == '') {
+                                          return Container();
+                                        } else {
+                                          return Container(
+                                            padding:
+                                                const EdgeInsets.only(top: 3),
+                                            child: Text(
+                                              e['addrStr'],
+                                              style: const TextStyle(
+                                                fontSize: 14,
+                                              ),
                                             ),
-                                          ),
-                                        );
-                                      }
-                                    }(),
-                                  ],
-                                ),
-                                const Icon(Icons.add_circle_outline)
-                              ],
+                                          );
+                                        }
+                                      }(),
+                                    ],
+                                  ),
+                                  const Icon(Icons.add_circle_outline),
+                                ],
+                              ),
+                              onTap: () {
+                                Get.back(result: e);
+                              },
                             ),
                           );
                         }).toList(),
@@ -210,6 +217,9 @@ class SearchPageController extends GetxController {
         }
       }
 
+      isLoading = false;
+      update();
+    }).catchError((e) {
       isLoading = false;
       update();
     });

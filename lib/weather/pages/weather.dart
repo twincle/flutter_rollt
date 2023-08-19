@@ -47,29 +47,31 @@ class WeatherPage extends GetView<WeatherPageController> {
                                     fontSize: 18,
                                   ),
                                 ),
-                                Container(
-                                  child: controller.locations.isEmpty
-                                      ? InkWell(
-                                          onTap: () =>
-                                              Get.toNamed('/weather/search'),
-                                          child: const Text(
+                                InkWell(
+                                  child: Container(
+                                    child: controller.locations.isEmpty
+                                        ? const Text(
                                             '更多天气信息请点这',
                                             style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 14,
                                             ),
-                                          ),
-                                        )
-                                      : InkWell(
-                                          onTap: () =>
-                                              Get.toNamed('/weather/weathers'),
-                                          child: const Icon(
+                                          )
+                                        : const Icon(
                                             Icons
                                                 .arrow_drop_down_circle_outlined,
                                             color: Colors.white,
                                             size: 16,
                                           ),
-                                        ),
+                                  ),
+                                  onTap: () {
+                                    Get.toNamed('/weather/search')!
+                                        .then((value) {
+                                      if (value != null) {
+                                        controller.loadLocation(value);
+                                      }
+                                    });
+                                  },
                                 ),
                               ],
                             );
@@ -154,36 +156,34 @@ class WeatherPageController extends GetxController {
   void onInit() {
     super.onInit();
 
-    locations = storage.get('location') ?? [];
+    locations = storage.get('locations') ?? [];
 
     loadWeather();
   }
 
-  void loadWeather() {
+  void loadLocation(Map<String, dynamic> location) {
+    isLoading = true;
+    update();
+
+    storage.set('locations', location);
+  }
+
+  void loadWeather({
+    Map<String, dynamic>? loc,
+  }) {
+    Future promise;
+
     if (locations.isEmpty) {
-      getCurrentLocationService().then((value) {
+      promise = getCurrentLocationService().then((value) {
         location = (value.data as List<dynamic>)[0];
 
         return getWeatherService(
           lat: location['latitude'],
           lon: location['longitude'],
         );
-      }).then((value) {
-        _w = (value.data as Map<String, dynamic>)['responses'][0]['weather'][0];
-
-        onWeather();
-        return getDailyWeatherService(
-          lat: location['latitude'],
-          lon: location['longitude'],
-        );
-      }).then((value) {
-        _d = (value.data as Map<String, dynamic>)['value'][0]['responses'][0]
-            ['average'][0]['days'];
-
-        isLoading = false;
-        update();
       });
     } else {
+      promise = getWeatherService(lat: loc!['lat'], lon: loc['lon']);
       // Map<String, dynamic> ln = (value.data as Map<String, dynamic>).['value'][0]['metadata'];
       // return addLocationService(data: {
       //     'actionType':'Follow',
@@ -211,6 +211,25 @@ class WeatherPageController extends GetxController {
       //     },
       //   });
     }
+
+    promise.then((value) {
+      _w = (value.data as Map<String, dynamic>)['responses'][0]['weather'][0];
+
+      onWeather();
+      return getDailyWeatherService(
+        lat: location['latitude'],
+        lon: location['longitude'],
+      );
+    }).then((value) {
+      _d = (value.data as Map<String, dynamic>)['value'][0]['responses'][0]
+          ['average'][0]['days'];
+
+      isLoading = false;
+      update();
+    }).catchError((e) {
+      isLoading = false;
+      update();
+    });
   }
 
   void onWeather() {
