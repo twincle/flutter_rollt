@@ -171,8 +171,8 @@ class SearchPageController extends GetxController {
             'province': responseData[i]['address']['addressRegion'] ?? '',
             'city': responseData[i]['address']['addressSubregion'] ?? '',
             'district': responseData[i]['name'],
-            'lat': responseData[i]['geo']['latitude'],
-            'lon': responseData[i]['geo']['longitude'],
+            'latitude': responseData[i]['geo']['latitude'],
+            'longitude': responseData[i]['geo']['longitude'],
           });
 
           String str = '';

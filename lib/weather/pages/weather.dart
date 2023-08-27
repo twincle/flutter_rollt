@@ -36,49 +36,41 @@ class WeatherPage extends GetView<WeatherPageController> {
                     padding: const EdgeInsets.all(15),
                     child: ListView(
                       children: [
-                        () {
-                          if (controller.locations.isEmpty) {
-                            return Row(
-                              children: [
-                                Text(
-                                  '${controller.location['state']} ${controller.location['city']}  ',
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                  ),
-                                ),
-                                InkWell(
-                                  child: Container(
-                                    child: controller.locations.isEmpty
-                                        ? const Text(
-                                            '更多天气信息请点这',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 14,
-                                            ),
-                                          )
-                                        : const Icon(
-                                            Icons
-                                                .arrow_drop_down_circle_outlined,
-                                            color: Colors.white,
-                                            size: 16,
-                                          ),
-                                  ),
-                                  onTap: () {
-                                    Get.toNamed('/weather/search')!
-                                        .then((value) {
-                                      if (value != null) {
-                                        controller.loadLocation(value);
-                                      }
-                                    });
-                                  },
-                                ),
-                              ],
-                            );
-                          } else {
-                            return Container();
-                          }
-                        }(),
+                        Row(
+                          children: [
+                            Text(
+                              controller.locationStr,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                              ),
+                            ),
+                            InkWell(
+                              child: Container(
+                                child: controller.locations.isEmpty
+                                    ? const Text(
+                                        '更多天气点这',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 14,
+                                        ),
+                                      )
+                                    : const Icon(
+                                        Icons.arrow_drop_down_circle_outlined,
+                                        color: Colors.white,
+                                        size: 16,
+                                      ),
+                              ),
+                              onTap: () {
+                                Get.toNamed('/weather/search')!.then((value) {
+                                  if (value != null) {
+                                    controller.loadLocation(value);
+                                  }
+                                });
+                              },
+                            ),
+                          ],
+                        ),
                         TempWidget(weather: controller.weather),
                         FeelWidget(weather: controller.weather),
                         const SizedBox(height: 15),
@@ -144,8 +136,10 @@ class WeatherPageController extends GetxController {
   bool isLoading = true;
   Storage storage = Storage();
 
-  late List<Point> locations;
+  late List<dynamic> locations;
+  late int index;
   Map<String, dynamic> location = {};
+  late String locationStr;
 
   Map<String, dynamic> _w = {};
   Map<String, dynamic> weather = {};
@@ -157,15 +151,27 @@ class WeatherPageController extends GetxController {
     super.onInit();
 
     locations = storage.get('locations') ?? [];
+    index = storage.get('location_index') ?? 0;
 
-    loadWeather();
+    if (locations.isEmpty) {
+      loadWeather();
+    } else {
+      location = locations[index];
+      loadWeather(loc: location);
+    }
   }
 
-  void loadLocation(Map<String, dynamic> location) {
+  void loadLocation(Map<String, dynamic> loc) {
     isLoading = true;
     update();
 
-    storage.set('locations', location);
+    locations.add(loc);
+    index = locations.length - 1;
+    storage.set('locations', locations);
+    storage.set('location_index', index);
+
+    location = loc;
+    loadWeather(loc: loc);
   }
 
   void loadWeather({
@@ -177,39 +183,27 @@ class WeatherPageController extends GetxController {
       promise = getCurrentLocationService().then((value) {
         location = (value.data as List<dynamic>)[0];
 
+        if (location['country'] == '中华人民共和国') {
+          locationStr = '${location['city']} ${location['state']}  ';
+        } else {
+          locationStr =
+              '${location['city']} ${location['state']} ${location['country']}  ';
+        }
+
         return getWeatherService(
           lat: location['latitude'],
           lon: location['longitude'],
         );
       });
     } else {
-      promise = getWeatherService(lat: loc!['lat'], lon: loc['lon']);
-      // Map<String, dynamic> ln = (value.data as Map<String, dynamic>).['value'][0]['metadata'];
-      // return addLocationService(data: {
-      //     'actionType':'Follow',
-      //     'targetType':'Location',
-      //     'definitionName':'${location['latitude']},${location['longitude']}',
-      //     'degree':'FavoriteLocation',
-      //     'metaData':{
-      //       'geoCoordinates':{
-      //         'latitude':location['latitude'],
-      //         'longitude':location['longitude'],
-      //       },
-      //       'subRegion':location['longitude'],
-      //       'readLink':'https://cn.bing.com/api/v6/places/search?q=%e6%b2%b3%e5%8c%97%e7%9c%81%e6%b2%a7%e5%b7%9e%e5%b8%82%e6%b2%a7%e5%8e%bf&setLang=zh-cn&dtype=PlaceOrLandmark',
-      //       'city':'沧县',
-      //       'state':'河北省',
-      //       'countryRegion':'中华人民共和国',
-      //       'isoCode':'cn',
-      //       'locationType':102,
-      //       'locationTypeId':'沧县,河北省,中华人民共和国',
-      //       'language':'zh-cn',
-      //       'properties':{
-      //         'locationType':'Place',
-      //         'entitySubTypeHints':'Other',
-      //       },
-      //     },
-      //   });
+      if (loc!['country'] == '中华人民共和国') {
+        locationStr = '${loc['district']} ${loc['city']} ${loc['province']}  ';
+      } else {
+        locationStr =
+            '${loc['district']} ${loc['city']} ${loc['province']} ${loc['country']}  ';
+      }
+
+      promise = getWeatherService(lat: loc['latitude'], lon: loc['longitude']);
     }
 
     promise.then((value) {
