@@ -10,8 +10,11 @@ class WeathersPage extends GetView<WeathersPageController> {
         return Scaffold(
           appBar: const TopBarWidget(text: '天气'),
           body: Container(
-            margin: const EdgeInsets.all(15),
-            child: Column(
+            decoration: const BoxDecoration(
+              color: Color.fromARGB(255, 33, 70, 103),
+            ),
+            padding: const EdgeInsets.all(15),
+            child: ListView(
               children: [
                 ...controller.weathers.map((e) {
                   return ItemWidget(weather: e);
@@ -56,6 +59,9 @@ class WeathersPageController extends GetxController {
           'temp': (w['current']['temp'] as double).floor(),
         });
       }
+
+      isLoading = false;
+      update();
     });
   }
 }

@@ -3,10 +3,15 @@ part of weather;
 class BgWidget extends StatelessWidget {
   final String cap;
   final Map<String, dynamic> almanac;
+  final BoxFit? fit;
   final double? radius;
 
   const BgWidget(
-      {super.key, required this.cap, required this.almanac, this.radius});
+      {super.key,
+      required this.cap,
+      required this.almanac,
+      this.fit,
+      this.radius});
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +104,7 @@ class BgWidget extends StatelessWidget {
           Radius.circular(radius ?? 0),
         ),
         image: DecorationImage(
-          fit: BoxFit.cover,
+          fit: fit ?? BoxFit.cover,
           image: NetworkImage(bg),
         ),
       ),

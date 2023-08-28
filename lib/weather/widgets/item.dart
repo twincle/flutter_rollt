@@ -24,6 +24,7 @@ class ItemWidget extends StatelessWidget {
               child: BgWidget(
                 almanac: weather['almanac'],
                 cap: weather['cap'],
+                fit: BoxFit.fill,
                 radius: 10,
               ),
             ),
