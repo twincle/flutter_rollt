@@ -1,7 +1,6 @@
 library weather;
 
 import 'dart:async';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 
@@ -21,6 +20,7 @@ part 'pages/weathers.dart';
 part 'widgets/feel.dart';
 part 'widgets/daily.dart';
 part 'widgets/hourly.dart';
+part 'widgets/item.dart';
 part 'widgets/life.dart';
 part 'widgets/temp.dart';
 part 'widgets/bg.dart';

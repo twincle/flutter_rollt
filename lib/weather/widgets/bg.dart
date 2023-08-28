@@ -3,8 +3,10 @@ part of weather;
 class BgWidget extends StatelessWidget {
   final String cap;
   final Map<String, dynamic> almanac;
+  final double? radius;
 
-  const BgWidget({super.key, required this.cap, required this.almanac});
+  const BgWidget(
+      {super.key, required this.cap, required this.almanac, this.radius});
 
   @override
   Widget build(BuildContext context) {
@@ -91,9 +93,16 @@ class BgWidget extends StatelessWidget {
           'https://assets.msn.cn/weathermapdata/1/static/background/mobile/partlysunny_sunset1.png';
     }
 
-    return Image.network(
-      bg,
-      fit: BoxFit.cover,
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(
+          Radius.circular(radius ?? 0),
+        ),
+        image: DecorationImage(
+          fit: BoxFit.cover,
+          image: NetworkImage(bg),
+        ),
+      ),
     );
   }
 }

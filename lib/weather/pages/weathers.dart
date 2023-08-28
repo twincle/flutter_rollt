@@ -9,7 +9,16 @@ class WeathersPage extends GetView<WeathersPageController> {
       builder: (controller) {
         return Scaffold(
           appBar: const TopBarWidget(text: '天气'),
-          body: Container(),
+          body: Container(
+            margin: const EdgeInsets.all(15),
+            child: Column(
+              children: [
+                ...controller.weathers.map((e) {
+                  return ItemWidget(weather: e);
+                }).toList(),
+              ],
+            ),
+          ),
         );
       },
     );
@@ -20,12 +29,33 @@ class WeathersPageController extends GetxController {
   bool isLoading = true;
   Storage storage = Storage();
 
+  List<dynamic> locations = [];
+  List<Future> promises = [];
+  List<Map<String, dynamic>> weathers = [];
+
   @override
   void onInit() {
     super.onInit();
 
-    searchLocation();
-  }
+    locations = storage.get('locations');
+    locations
+        .map((e) => promises.add(getWeatherService(
+              lat: e['latitude'],
+              lon: e['longitude'],
+            )))
+        .toList();
+    Future.wait(promises).then((values) {
+      for (int i = 0; i < values.length; i++) {
+        Map<String, dynamic> w = (values[i].data
+            as Map<String, dynamic>)['responses'][0]['weather'][0];
 
-  void searchLocation() {}
+        weathers.add({
+          'location': locations[i],
+          'almanac': w['forecast']['days'][0]['almanac'],
+          'cap': w['current']['cap'],
+          'temp': (w['current']['temp'] as double).floor(),
+        });
+      }
+    });
+  }
 }

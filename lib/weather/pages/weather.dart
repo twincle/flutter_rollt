@@ -62,11 +62,15 @@ class WeatherPage extends GetView<WeatherPageController> {
                                       ),
                               ),
                               onTap: () {
-                                Get.toNamed('/weather/search')!.then((value) {
-                                  if (value != null) {
-                                    controller.loadLocation(value);
-                                  }
-                                });
+                                if (controller.locations.isEmpty) {
+                                  Get.toNamed('/weather/search')!.then((value) {
+                                    if (value != null) {
+                                      controller.loadLocation(value);
+                                    }
+                                  });
+                                } else {
+                                  Get.toNamed('/weather/weathers');
+                                }
                               },
                             ),
                           ],
