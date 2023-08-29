@@ -14,13 +14,24 @@ class WeathersPage extends GetView<WeathersPageController> {
               color: Color.fromARGB(255, 33, 70, 103),
             ),
             padding: const EdgeInsets.all(15),
-            child: ListView(
-              children: [
-                ...controller.weathers.map((e) {
-                  return ItemWidget(weather: e);
-                }).toList(),
-              ],
-            ),
+            child: () {
+              if (controller.isLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else {
+                return ListView(
+                  children: [
+                    ...controller.weathers.map((e) {
+                      return InkWell(
+                        onTap: () => controller.goBack(e),
+                        child: ItemWidget(weather: e),
+                      );
+                    }).toList(),
+                  ],
+                );
+              }
+            }(),
           ),
         );
       },
@@ -63,5 +74,12 @@ class WeathersPageController extends GetxController {
       isLoading = false;
       update();
     });
+  }
+
+  goBack(e) {
+    int index = locations.indexOf(e['location']);
+    storage.set('location_index', index);
+
+    Get.back(result: index);
   }
 }

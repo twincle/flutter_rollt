@@ -42,7 +42,6 @@ class WeatherPage extends GetView<WeatherPageController> {
                               controller.locationStr,
                               style: const TextStyle(
                                 color: Colors.white,
-                                fontSize: 16,
                               ),
                             ),
                             InkWell(
@@ -69,7 +68,12 @@ class WeatherPage extends GetView<WeatherPageController> {
                                     }
                                   });
                                 } else {
-                                  Get.toNamed('/weather/weathers');
+                                  Get.toNamed('/weather/weathers')!
+                                      .then((value) {
+                                    if (value != null) {
+                                      controller.changeLocation(value);
+                                    }
+                                  });
                                 }
                               },
                             ),
@@ -194,6 +198,13 @@ class WeatherPageController extends GetxController {
 
     location = loc;
     loadWeather(loc: loc);
+  }
+
+  void changeLocation(int index) {
+    isLoading = true;
+    update();
+
+    loadWeather(loc: locations[index]);
   }
 
   void loadWeather({
