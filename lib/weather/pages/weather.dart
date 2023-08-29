@@ -148,7 +148,9 @@ class WeatherPageController extends GetxController {
   Map<String, dynamic> _w = {};
   Map<String, dynamic> weather = {};
 
-  List<dynamic> _d = [];
+  // List<dynamic> _d = [];
+
+  late Timer timer;
 
   @override
   void onInit() {
@@ -159,10 +161,26 @@ class WeatherPageController extends GetxController {
 
     if (locations.isEmpty) {
       loadWeather();
+
+      timer = Timer.periodic(const Duration(minutes: 3), (t) {
+        loadWeather();
+      });
     } else {
       location = locations[index];
       loadWeather(loc: location);
+
+      timer = Timer.periodic(const Duration(minutes: 3), (t) {
+        location = locations[index];
+        loadWeather(loc: location);
+      });
     }
+  }
+
+  @override
+  void onClose() {
+    timer.cancel();
+
+    super.onClose();
   }
 
   void loadLocation(Map<String, dynamic> loc) {
@@ -214,13 +232,13 @@ class WeatherPageController extends GetxController {
       _w = (value.data as Map<String, dynamic>)['responses'][0]['weather'][0];
 
       onWeather();
-      return getDailyWeatherService(
-        lat: location['latitude'],
-        lon: location['longitude'],
-      );
-    }).then((value) {
-      _d = (value.data as Map<String, dynamic>)['value'][0]['responses'][0]
-          ['average'][0]['days'];
+      //   return getDailyWeatherService(
+      //     lat: location['latitude'],
+      //     lon: location['longitude'],
+      //   );
+      // }).then((value) {
+      //   _d = (value.data as Map<String, dynamic>)['value'][0]['responses'][0]
+      //       ['average'][0]['days'];
 
       isLoading = false;
       update();
@@ -238,7 +256,7 @@ class WeatherPageController extends GetxController {
       'cap': _w['current']['cap'],
       'nowcasting': _w['nowcasting'],
       'forecast': _w['forecast']['days'],
-      'daily': _d,
+      // 'daily': _d,
       'dayw': _w['forecast']['days'][0]['daily']['day']['cap'],
       'nightw': _w['forecast']['days'][0]['daily']['night']['cap'],
       'isDnSame': _w['forecast']['days'][0]['daily']['day']['cap'] ==
