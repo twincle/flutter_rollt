@@ -7,7 +7,7 @@ class TempWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String str = weather['nowcasting']['summary'];
+    String str = weather['nowcasting']['summary'] ?? '。';
     str = str.substring(0, str.length - 1);
 
     TextStyle textStyle = const TextStyle(

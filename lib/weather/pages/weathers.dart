@@ -22,6 +22,37 @@ class WeathersPage extends GetView<WeathersPageController> {
               } else {
                 return ListView(
                   children: [
+                    const SizedBox(height: 10),
+                    Row(
+                      children: [
+                        InkWell(
+                          onTap: () =>
+                              Get.toNamed('/weather/search')!.then((value) {
+                            if (value != null) {
+                              controller.searchBack(value);
+                            }
+                          }),
+                          child: const Row(
+                            children: [
+                              Icon(
+                                Icons.add_circle_outline,
+                                color: Colors.white,
+                                size: 25,
+                              ),
+                              SizedBox(width: 10),
+                              Text(
+                                '添加城市',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 25),
                     ...controller.weathers.map((e) {
                       return InkWell(
                         onTap: () => controller.goBack(e),
@@ -76,8 +107,17 @@ class WeathersPageController extends GetxController {
     });
   }
 
-  goBack(e) {
-    int index = locations.indexOf(e['location']);
+  searchBack(value) {
+    locations.add(value);
+    int index = locations.length - 1;
+    storage.set('locations', locations);
+    storage.set('location_index', index);
+
+    Get.back(result: index);
+  }
+
+  goBack(value) {
+    int index = locations.indexOf(value['location']);
     storage.set('location_index', index);
 
     Get.back(result: index);

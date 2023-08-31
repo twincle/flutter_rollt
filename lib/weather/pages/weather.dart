@@ -71,7 +71,7 @@ class WeatherPage extends GetView<WeatherPageController> {
                                   Get.toNamed('/weather/weathers')!
                                       .then((value) {
                                     if (value != null) {
-                                      controller.changeLocation(value);
+                                      controller.changeLocation(value: value);
                                     }
                                   });
                                 }
@@ -154,7 +154,7 @@ class WeatherPageController extends GetxController {
 
   // List<dynamic> _d = [];
 
-  late Timer timer;
+  Timer? timer;
 
   @override
   void onInit() {
@@ -170,19 +170,13 @@ class WeatherPageController extends GetxController {
         loadWeather();
       });
     } else {
-      location = locations[index];
-      loadWeather(loc: location);
-
-      timer = Timer.periodic(const Duration(minutes: 3), (t) {
-        location = locations[index];
-        loadWeather(loc: location);
-      });
+      changeLocation();
     }
   }
 
   @override
   void onClose() {
-    timer.cancel();
+    timer!.cancel();
 
     super.onClose();
   }
@@ -200,11 +194,22 @@ class WeatherPageController extends GetxController {
     loadWeather(loc: loc);
   }
 
-  void changeLocation(int index) {
+  void changeLocation({
+    value,
+  }) {
     isLoading = true;
     update();
 
-    loadWeather(loc: locations[index]);
+    if (timer != null) {
+      timer!.cancel();
+    }
+    location = locations[value ?? index];
+    loadWeather(loc: location);
+
+    timer = Timer.periodic(const Duration(minutes: 1), (t) {
+      location = locations[value ?? index];
+      loadWeather(loc: location);
+    });
   }
 
   void loadWeather({
@@ -265,7 +270,7 @@ class WeatherPageController extends GetxController {
       'current': _w['current'],
       'temp': _w['current']['temp'],
       'cap': _w['current']['cap'],
-      'nowcasting': _w['nowcasting'],
+      'nowcasting': _w['nowcasting'] ?? {},
       'forecast': _w['forecast']['days'],
       // 'daily': _d,
       'dayw': _w['forecast']['days'][0]['daily']['day']['cap'],
