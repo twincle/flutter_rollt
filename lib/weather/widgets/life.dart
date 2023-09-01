@@ -22,6 +22,7 @@ class LifeWidget extends StatelessWidget {
         ),
         color: Colors.white10,
       ),
+      margin: const EdgeInsets.fromLTRB(15, 0, 15, 0),
       padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

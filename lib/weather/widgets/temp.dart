@@ -15,72 +15,75 @@ class TempWidget extends StatelessWidget {
       fontSize: 16,
     );
 
-    return Column(
-      children: [
-        const SizedBox(height: 50),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            IconWidget(
-              cap: weather['cap'],
-              almanac: weather['almanac'],
-            ),
-            Container(
-              margin: const EdgeInsets.fromLTRB(30, 0, 20, 0),
-              child: Text(
-                '${(weather['temp'] as double).floor()}',
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 100,
-                ),
+    return Padding(
+      padding: const EdgeInsets.all(15),
+      child: Column(
+        children: [
+          const SizedBox(height: 50),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconWidget(
+                cap: weather['cap'],
+                almanac: weather['almanac'],
               ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  '℃',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 30,
-                  ),
-                ),
-                Text(
-                  weather['cap'],
+              Container(
+                margin: const EdgeInsets.fromLTRB(30, 0, 20, 0),
+                child: Text(
+                  '${(weather['temp'] as double).floor()}',
                   style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 20,
+                    fontSize: 100,
                   ),
                 ),
-              ],
-            )
-          ],
-        ),
-        const SizedBox(height: 15),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              '今天${weather['dayw']}',
-              style: textStyle,
-            ),
-            Text(
-              weather['isDnSame'] ? '' : '转${weather['nightw']}',
-              style: textStyle,
-            ),
-            Text(
-              '    ${(weather['tempHi'] as double).floor()}℃ / ${(weather['tempLo'] as double).floor()}℃',
-              style: textStyle,
-            ),
-          ],
-        ),
-        const SizedBox(height: 15),
-        Text(
-          str,
-          style: textStyle,
-        ),
-        const SizedBox(height: 120),
-      ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    '℃',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 30,
+                    ),
+                  ),
+                  Text(
+                    weather['cap'],
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+          const SizedBox(height: 15),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                '今天${weather['dayw']}',
+                style: textStyle,
+              ),
+              Text(
+                weather['isDnSame'] ? '' : '转${weather['nightw']}',
+                style: textStyle,
+              ),
+              Text(
+                '    ${(weather['tempHi'] as double).floor()}℃ / ${(weather['tempLo'] as double).floor()}℃',
+                style: textStyle,
+              ),
+            ],
+          ),
+          const SizedBox(height: 15),
+          Text(
+            str,
+            style: textStyle,
+          ),
+          const SizedBox(height: 120),
+        ],
+      ),
     );
   }
 }

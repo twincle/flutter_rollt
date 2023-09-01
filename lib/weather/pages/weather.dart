@@ -33,11 +33,12 @@ class WeatherPage extends GetView<WeatherPageController> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.all(15),
                     child: ListView(
                       children: [
+                        const SizedBox(height: 15),
                         Row(
                           children: [
+                            const SizedBox(width: 15),
                             Text(
                               controller.locationStr,
                               style: const TextStyle(
@@ -77,6 +78,7 @@ class WeatherPage extends GetView<WeatherPageController> {
                                 }
                               },
                             ),
+                            const SizedBox(width: 15),
                           ],
                         ),
                         TempWidget(weather: controller.weather),
@@ -93,6 +95,7 @@ class WeatherPage extends GetView<WeatherPageController> {
                             color: Colors.white10,
                           ),
                           height: 250,
+                          margin: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                           child: DefaultTabController(
                             length: 2,
                             child: Scaffold(
